@@ -34,7 +34,7 @@ local options = {
   scrolloff = 100,
   sidescrolloff = 8,
   guifont = "monospace:h17",
-  colorcolumn = "80",
+  colorcolumn = "100",
   autochdir = true,
   mouse = "a",
 }
@@ -48,13 +48,4 @@ end
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
 vim.cmd [[set formatoptions-=cro]]
-
-vim.cmd('filetype plugin indent on')
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'rust',
-  callback = function()
-    vim.opt_local.expandtab = true
-    vim.opt_local.shiftwidth = 4
-    vim.opt_local.tabstop = 4
-  end,
-})
+vim.g.rust_recommended_style = false

@@ -15,33 +15,33 @@ local check_backspace = function()
   return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 end
 
---   פּ ﯟ   some other good icons
+-- 󰃐 󰆩 󰙅 󰛡  󰅲 some other good icons
 local kind_icons = {
-  Text = "",
+  Text = "󰉿",
   Method = "m",
-  Function = "",
+  Function = "󰊕",
   Constructor = "",
   Field = "",
-  Variable = "",
-  Class = "",
+  Variable = "󰆧",
+  Class = "󰌗",
   Interface = "",
   Module = "",
   Property = "",
   Unit = "",
-  Value = "",
+  Value = "󰎠",
   Enum = "",
-  Keyword = "",
+  Keyword = "󰌋",
   Snippet = "",
-  Color = "",
-  File = "",
+  Color = "󰏘",
+  File = "󰈙",
   Reference = "",
-  Folder = "",
+  Folder = "󰉋",
   EnumMember = "",
-  Constant = "",
+  Constant = "󰇽",
   Struct = "",
   Event = "",
-  Operator = "",
-  TypeParameter = "",
+  Operator = "󰆕",
+  TypeParameter = "󰊄",
 }
 
 cmp.setup({
@@ -169,8 +169,17 @@ nvim_lsp.nil_ls.setup({
 
 -- Rust
 nvim_lsp.rust_analyzer.setup({
+  on_attach = function(client, _)
+    client.server_capabilities.semanticTokensProvider = nil
+  end,
   settings = {
     ["rust-analyzer"] = {
+      diagnostics = {
+        disabled = { "inactive-code" },
+      },
+      ['cargo'] = {
+        ["allFeatures"] = true,
+      },
       workspace = {
         symbol = {
           search = {
@@ -180,7 +189,4 @@ nvim_lsp.rust_analyzer.setup({
       },
     },
   },
-  on_attach = function(client, bufnr)
-    format_on_save(client, bufnr)
-  end,
 })

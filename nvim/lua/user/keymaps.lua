@@ -10,7 +10,7 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Open config file 
+-- Open config file
 keymap("n", "<leader>c", ":e ~/.config/nvim/init.lua <cr>", opts)
 
 -- Better window navigation
@@ -27,20 +27,16 @@ keymap("n", "<leader>t", ":Trouble <cr>", opts)
 keymap("n", "<leader>w", ":HopWord <cr>", opts)
 keymap("n", "<leader>l", ":HopLine <cr>", opts)
 
-keymap("n", "<leader>s", ":SymbolsOutline<cr>", opts)
-
 -- Google stuff.
 keymap("n", "<leader>pp", ":PiperSelectActiveFiles<cr>", opts)
 keymap("n", "<leader>pa", ":PiperLoadActiveAsBuffers<cr>", opts)
 
 -- Telescope
-keymap("n", "cs", ":Telescope codesearch find_query<cr>", opts)
 keymap("n", "ff", ":Telescope file_browser<cr>", opts)
-keymap("n", "gr", ":Telescope lsp_references<CR>", opts)
-keymap("n", "gd", ":Telescope lsp_definitions<CR>", opts)
-keymap("n", "fd", ":Telescope buffers<CR>", opts)
-
-keymap("n", "gv", ":vsp<CR>:Telescope lsp_definitions<CR>", opts)
+keymap("n", "fb", ":Telescope buffers<CR>", opts)
+keymap("n", "fg", ":Telescope live_grep search_dirs=.<CR>", opts)
+keymap("n", "fh", ":Telescope harpoon marks<CR>", opts)
+keymap("n", "fu", ":Telescope undo<CR>", opts)
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
@@ -60,7 +56,10 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 -- Format code
-keymap("v", "<leader>ff", ":FormatLines<CR>", opts)
+keymap("n", "<C-f>", ":lua vim.lsp.buf.format()<CR>", opts)
+
+-- Show more info with the LSP.
+keymap("n", "K", ":lua vim.lsp.buf.hover()<CR>", opts)
 
 -- Move text up and down
 keymap("v", "<A-j>", ":m .+1<CR>==", opts)
@@ -78,3 +77,22 @@ keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+
+-- Swap window
+keymap("n", '<C-W>u', '<C-W>x', term_opts)
+
+-- Toggle NvimTree
+keymap("n", '<C-n>', ':NvimTreeToggle<CR>', term_opts)
+
+-- Lsp key maps.
+keymap("n", 'gr', ':lua vim.lsp.buf.references()<CR>', term_opts)
+keymap("n", 'gd', ':lua vim.lsp.buf.definition()<CR>', term_opts)
+keymap("n", 'ca', ':lua vim.lsp.buf.code_action()<CR>', term_opts)
+
+-- Quickfix next and previous
+keymap("n", '<Tab>j', '<cmd>cnext<CR>zz', term_opts)
+keymap("n", '<Tab>k', '<cmd>cprev<CR>zz', term_opts)
+
+-- Harpoon maps
+keymap("n", 'gha', ":lua require(\"harpoon.mark\").add_file()<CR>", term_opts)
+keymap("n", 'ghf', ":lua require(\"harpoon.ui\").toggle_quick_menu()<CR>", term_opts)

@@ -39,50 +39,87 @@ packer.init({
 })
 
 return packer.startup(function(use)
-  use("wbthomason/packer.nvim")
-  use("nvim-lua/popup.nvim")
-  use("nvim-lua/plenary.nvim")
-  use("projekt0n/github-nvim-theme")
-  use("morhetz/gruvbox")
-  use("hrsh7th/nvim-cmp")
-  use("hrsh7th/cmp-buffer")
-  use("hrsh7th/cmp-path")
-  use("hrsh7th/cmp-cmdline")
-  use("hrsh7th/cmp-nvim-lsp")
-  use("hrsh7th/cmp-nvim-lua")
-  use("hrsh7th/cmp-vsnip")
-  use("hrsh7th/vim-vsnip")
-  use("onsails/lspkind.nvim")
-  use("neovim/nvim-lspconfig")
-  use("L3MON4D3/LuaSnip")
-  use("rafamadriz/friendly-snippets")
-  use("nvim-telescope/telescope.nvim")
-  use("windwp/nvim-autopairs")
-  use("akinsho/bufferline.nvim")
-  use("karb94/neoscroll.nvim")
-  use("numToStr/Comment.nvim")
-  use("JoosepAlviste/nvim-ts-context-commentstring")
-  use("simrat39/symbols-outline.nvim")
-  use("thehackercoding/onehalf-vim")
-  use("mhinz/vim-signify")
-  use("ellisonleao/gruvbox.nvim")
-  use("nvim-telescope/telescope-file-browser.nvim")
+  use "wbthomason/packer.nvim"
+  use "nvim-lua/popup.nvim"
+  use "nvim-lua/plenary.nvim"
+  use "projekt0n/github-nvim-theme"
+  use "hrsh7th/nvim-cmp"
+  use "hrsh7th/cmp-buffer"
+  use "hrsh7th/cmp-path"
+  use "hrsh7th/cmp-cmdline"
+  use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/cmp-nvim-lua"
+  use "hrsh7th/cmp-vsnip"
+  use "hrsh7th/vim-vsnip"
+  use "onsails/lspkind.nvim"
+  use "neovim/nvim-lspconfig"
+  use "L3MON4D3/LuaSnip"
+  use "rafamadriz/friendly-snippets"
+  use "nvim-telescope/telescope.nvim"
+  use "akinsho/bufferline.nvim"
+  use "karb94/neoscroll.nvim"
+  use "numToStr/Comment.nvim"
+  use "JoosepAlviste/nvim-ts-context-commentstring"
+  use "simrat39/symbols-outline.nvim"
+  use "thehackercoding/onehalf-vim"
+  use "mhinz/vim-signify"
+  use "ellisonleao/gruvbox.nvim"
+  use "nvim-telescope/telescope-file-browser.nvim"
+  use "j-hui/fidget.nvim"
+  use "nvim-tree/nvim-tree.lua"
+  use 'rust-lang/rust.vim'
+  use 'nvim-treesitter/nvim-treesitter'
+  use 'nvim-treesitter/nvim-treesitter-context'
+  use 'nvim-treesitter/nvim-treesitter-refactor'
+  use 'ThePrimeagen/harpoon'
+  use 'debugloop/telescope-undo.nvim'
+  use 'kevinhwang91/nvim-bqf'
+  use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
+  use {
+    "jesseleite/nvim-noirbuddy",
+    requires = { "tjdevries/colorbuddy.nvim" }
+  }
   use {
     "windwp/nvim-autopairs",
-    config = function() require("nvim-autopairs").setup {} end
+    config = function()
+      require("nvim-autopairs").setup()
+    end
   }
-  use({ "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" })
-  use({
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+  }
+  use {
     "nvim-lualine/lualine.nvim",
-    requires = { "kyazdani42/nvim-web-devicons", opt = true },
-  })
-  use({
+    requires = {
+      "kyazdani42/nvim-web-devicons",
+      opt = true,
+    },
+  }
+  use {
     "phaazon/hop.nvim",
     branch = "v2",
     config = function()
       require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
     end,
-  })
+  }
+  use {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    after = "nvim-treesitter",
+    requires = "nvim-treesitter/nvim-treesitter",
+  }
+  use {
+    'nvimdev/dashboard-nvim',
+    event = 'VimEnter',
+    requires = { 'nvim-tree/nvim-web-devicons' }
+  }
+
+  -- optional
+  use { 'junegunn/fzf', run = function()
+    vim.fn['fzf#install']()
+  end
+  }
+
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
